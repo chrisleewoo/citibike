@@ -70,7 +70,7 @@ $db = db_connect();
 </div>
 
 <div class="boxTwo">
-<form action="runquery.php" method="POST">
+<form action="run_query" method="POST">
 	  <h1>Citibike Project</h1>
       <h2>Enter your SQL query:</h2>
       <textarea rows="8" cols="30" name="message_body"></textarea>
