@@ -1,0 +1,70 @@
+						$word = "drop";
+                        if (stristr($queryText, $word))
+                        {
+                            echo "<b><font color='red'>";
+                            echo "Error description: </b></font>Dropping, is not allowed!";
+                            goto end;
+                        }
+
+                        $sql = $queryText;
+                        $result = mysqli_query($conn, $sql);
+                        $check = 0;
+
+
+                        if (mysqli_num_rows($result) > 0)
+                        {
+                            echo "<center>";
+                            echo "<div style='height: 500px; overflow: auto;'>";
+                            echo "<table border='0' class='stats' cellspacing='2'>
+
+                            <tr>
+                            <td class='hed' colspan='10'><font color='white'></font></td>
+                            </tr>
+                            <tr>";
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $check += 1;
+								if($check == 1)
+                                {
+                                    echo "<th><u><font color='white'>index</font></u></th>";
+                                    foreach ($row as $key => $value)
+                                    {
+
+                                        if (mysqli_num_rows($result))
+                                            echo "<th><u><font color='white'>".$key."</font></u></th>";
+
+                                    }
+                                    echo "</tr>";
+                                }
+                                echo "<tr>";
+                                echo "<td><font color='white'>".$check."</font></td>";
+                                foreach ($row as $key => $value)
+                                {
+                                    if (mysqli_num_rows($result))
+                                        echo "<td><font color='white'>".$value."</font></td>";
+                                }
+                                echo "</tr>";
+                                //echo "<br>";
+                                //echo "<br>";
+                            }
+                            echo "</table>";
+                            echo "</div>";
+                            echo "</center>";
+                        }
+                        else
+                        {
+                            if(mysqli_error($conn))
+                            {
+                                echo "<b><font color='red'>";
+                                echo("Error description: </b></font>" . mysqli_error($conn));
+                            }
+                            else
+                                echo("Database Successfully Updated! ");
+                        }
+
+
+                        end:
+                        //mysql_free_result($result);
+                        mysqli_close($conn);
+                    }
+                ?>
