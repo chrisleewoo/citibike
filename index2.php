@@ -81,9 +81,9 @@ br>
 
 <?php
 $servername = "localhost";
-$username = "*******";
-$password = "*******";
-$dbname = "*******";
+$username = "cwootton";
+$password = "wo7635";
+$dbname = "cwootton";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -95,16 +95,20 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM Stations";
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-//echo "$result";
-while($row = mysql_fetch_array($result)) {
-    echo $row['column_name']; // Print a single column data
-    echo print_r($row);       // Print the entire row data
+$row = mysql_fetch_assoc($result);
+
+$columns = array_keys($row);
+print_r($columns); //prints the column names
+echo count($columns); //prints total number of columns
+
+print_r($row); //prints all columns and their values
+
+
+foreach ($row as $key=>$value) {
+  echo $key.":".$value; 
 }
-    }
-else {
-    echo "0 results";
-}
+
+
 
 $conn->close();
 ?>
